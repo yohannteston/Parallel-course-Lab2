@@ -26,7 +26,7 @@ void *findrank(void *arg)
 
 int main(int argc, char *argv[]) {
 	
-  pthread_t threads[NUM_THREADS];
+  pthread_t *threads;
   pthread_attr_t attr;
   int seed,i,j,rank,nthreads,ttime,t;
   long el;
@@ -39,6 +39,8 @@ int main(int argc, char *argv[]) {
 
   NUM_THREADS = atoi(argv[1]) ;
   
+  threads = (pthread_t*) malloc(NUM_THREADS * sizeof(pthread_t));
+
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 

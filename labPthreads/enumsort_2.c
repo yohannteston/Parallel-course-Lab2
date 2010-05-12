@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#define NUM_THREADS	2
+//#define NUM_THREADS	2
+int NUM_THREADS = 2 ;
 #define len 100000
 
 double indata[len], outdata[len];
@@ -38,12 +39,20 @@ int main(int argc, char *argv[]) {
   pthread_t threads[NUM_THREADS];
   pthread_attr_t attr;
   int seed,i,j,rank,nthreads,ttime,t;
-  struct thread_data index[NUM_THREADS];
+  struct thread_data *index;
   void *status;
   
+  if(argc < 2){
+	  printf("Give the number of thread.");
+	  return -1;
+  }
+
+  NUM_THREADS = atoi(argv[1]) ;
+
+  index = (struct thread_data*) malloc(NUM_THREADS * sizeof(struct thread_data)) ;
+
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-	
 
   // Generate random numbers (Wichmann-Hill)
   seed=171;
