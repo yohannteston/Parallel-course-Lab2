@@ -14,7 +14,6 @@
 		if(out_split[1].to_f < min_time)
 			min_time = out_split[1].to_f;
 			min_thread = out_split[0];
-	puts "#{min_thread}  #{min_time}" ;
 		end
 	}
 
