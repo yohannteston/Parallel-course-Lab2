@@ -60,8 +60,8 @@ int main (int argc, char *argv[])
 		  }
 		  printf("Main: completed join with thread %ld having a status of %ld\n",t,(long)status);
 		  }
-		  */ 
+	*/	   
 	printf("Main: program completed. Exiting.\n");
-	//pthread_exit(NULL);
+	pthread_exit(NULL);
 }
 
