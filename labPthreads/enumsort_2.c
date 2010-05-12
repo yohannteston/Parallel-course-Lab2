@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
 	 pthread_join(threads[t], &status);
 
   ttime=timer()-ttime;
-  printf("Time: %f %d\n",ttime/1000000.0,NUM_THREADS);
+  printf("%d %f\n",NUM_THREADS,ttime/1000000.0);
 
   // Check results, -1 implies data same as the previous element
     for (i=0; i<len-1; i++)
