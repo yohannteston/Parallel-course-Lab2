@@ -36,7 +36,7 @@ void *findrank(void *arg)
 
 int main(int argc, char *argv[]) {
 	
-  pthread_t threads[NUM_THREADS];
+  pthread_t *threads;
   pthread_attr_t attr;
   int seed,i,j,rank,nthreads,ttime,t;
   struct thread_data *index;
@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
   NUM_THREADS = atoi(argv[1]) ;
 
   index = (struct thread_data*) malloc(NUM_THREADS * sizeof(struct thread_data)) ;
+  threads = (pthread_t*) malloc(NUM_THREADS * sizeof(pthread_t)) ;
 
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
@@ -61,7 +62,6 @@ int main(int argc, char *argv[]) {
     indata[i]=seed/30268.0;
     outdata[i]=-1;
   }
-
 
   // Enumeration sort
   ttime=timer();
