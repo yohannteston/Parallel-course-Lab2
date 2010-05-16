@@ -1,0 +1,11 @@
+set title "Speedup in Gram-Schmidt orthogonalization 3"
+set ylabel "Speedup"
+set xlabel "Threads"
+set grid
+#set pointsize 2
+#set terminal postscript portrait enhanced
+#set term postscript eps enhanced
+#set output "graph.eps"
+plot "pic/data_gram3.dat" index 0:0 using 2:($3/$4) ti "10x10" with linespoints,\
+"pic/data_gram3.dat" index 1:1 using 2:($3/$4) ti "100x100" with linespoints,\
+"pic/data_gram3.dat" index 2:2 using 2:($3/$4) ti "1000x1000" with linespoints

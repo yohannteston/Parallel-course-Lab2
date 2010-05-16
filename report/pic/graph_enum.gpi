@@ -1,0 +1,10 @@
+set title "Speedup in Enumeration-sort"
+set ylabel "Speedup"
+set xlabel "Threads"
+set grid
+#set pointsize 2
+#set terminal postscript portrait enhanced
+#set term postscript eps enhanced
+#set output "graph.eps"
+plot "pic/data_enum.dat" index 0:0 using 1:($2/$3) ti "enum1" with linespoints,\
+"pic/data_enum.dat" index 1:1 using 1:($2/$3) ti "enum2" with linespoints
