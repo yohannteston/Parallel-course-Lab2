@@ -8,7 +8,7 @@
 	min_time = 10000000 ;
 	min_thread = 0;
 
-	20.times {
+	10.times {
 		out = `enum2 #{n}` 
 		out_split = out.split " " ;
 		if(out_split[1].to_f < min_time)
