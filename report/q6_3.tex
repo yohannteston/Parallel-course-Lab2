@@ -32,6 +32,8 @@ The graphs \ref{overlap} and \ref{synchro} show the speedup for both of the sync
   \label{synchro}
 \end{figure}
 
-As we can see in those pictures, the speedup remains the same for both of the methods. The speedup is only good during the first step, that is from 1 to 4 threads, and remains more or less the same because of the synchronization. Indeed, regardless of the method we choose, threads must be synchronized.
+As we can see, the speedup is a bit better using overlap instead of synchronize. Indeed, with this method, a thread blocks only if it is necessary where it waits for each iteation using the synchronize method. 
 
-When several threads are used (from 2 to 32 in our example), the execution time does not change much. The only change that is worth notifying is the one that occurs when we go from 1 thread to 2 threads. At that time, the execution is basically divided by two. However, this cannot be said for the rest of the graph. This is because of synchronization. Indeed, using several threads increases performances but brings also the need to synchronize them. The time spent for this hinders the performances and creates some kind of lower bound the execution time cannot (around half of the time on one thread).
+However, this is still a synchronization step, so the results look very similar. Indeed, the threads must be synchronized for each iteration in both methods but it takes less time in overlap than synchronize.
+
+One can also observe that the overlap method gives better results with small problems size than the synchronize one. It makes sense because there is less synchronization overhead in the first case and such delays really matter when it comes to small problems. However, the overhead becomes quickly too important for such problems and the results drops, regardless of the synchronization method used. So, the problem size must be big enough to increase the number of threads without seeing the results decrease. 
