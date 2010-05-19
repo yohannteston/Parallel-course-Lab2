@@ -10,4 +10,6 @@
   \label{fig:enum_sort}
 \end{figure}
 
-We can see that the second version of the algorithm has a better speedup than the first one. Since this algorithm reduce the thread overhead it's seems logical to get this result. We can also see that the speedup increase logarithmicly (???).
+We can see that the second version of the algorithm has a better speedup than the first one. Since this algorithm reduce the thread-related overheads, it seems logical to get this result.
+
+Indeed, the first program creates as many threads as the length of the array to sort. Besides, it does so in a loop. We have therefore a huge overhead because each steps creates new threads and joins them. The second program creates only a specified number of threads once and waits for them once also. Thus, the overhead is much smaller with this approach, hence the better results.  

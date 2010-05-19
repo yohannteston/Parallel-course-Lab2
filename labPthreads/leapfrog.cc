@@ -35,14 +35,17 @@ void *leapfrog(void *ptr)
     {
       temp=uold; uold=u; u=unew; unew=temp;
 	  tdiff=timer();
-#if BARRIER == 2
+//#if BARRIER == 2
+if(barrier == 2){
       barrier1->setpeer();
 	  barrier2->setpeer();
-#elif BARRIER == 1
+}else if(barrier == 1)
+//#elif BARRIER == 1
 	  barrier->start(locstep);	
-#elif BARRIER == 3
+else if(barrier == 3)
+//#elif BARRIER == 3
 	  barrier->wait();
-#endif
+//#endif
 		
 		// Inner points 
 	  for (i=x1+1; i<x2; i++)
@@ -55,9 +58,11 @@ void *leapfrog(void *ptr)
 		 tupdate=timer();
 		
 	   // Partition boundary points
-#if BARRIER == 2
+//#if BARRIER == 2
+if(barrier == 2)
 		barrier1->waitpeer();  
-#elif BARRIER == 1
+//#elif BARRIER == 1
+else if(barrier == 1){
 		barrier->end(locstep);
 #endif
 		if (x1>0)
@@ -66,9 +71,11 @@ void *leapfrog(void *ptr)
 				x=double(x1)/Nx; y=double(j)/Ny;
 				unew[x1*len+j]=uold[x1*len+j]+2*dt*(F(x,y)-du[x1*len+j]);
 			}
-#if BARRIER == 2
+}
+if (barrier == 2)
+//#if BARRIER == 2
 		barrier2->waitpeer(); 
-#endif
+//#endif
 		if (x2<Nx)
 			for (j=y1+1; j<y2; j++){
 				du[x2*len+j]=(u[(x2+1)*len+j]-u[(x2-1)*len+j])/2.0*Nx+(u[x2*len+j+1]-u[x2*len+j-1])/2.0*Ny;

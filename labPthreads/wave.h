@@ -6,7 +6,7 @@
 
 /* Define type of barrier
  1:overlap 2:peer-to-peer, 3:synchronize, 0:no synchronization */ 
-#define BARRIER 3
+//#define BARRIER 3
 
 
 #ifndef wave_h

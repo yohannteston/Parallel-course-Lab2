@@ -4,9 +4,13 @@ int main(int argc, char **argv)
 {
   int Nx,Ny,nthreads;
   FILE *specf=fopen("wave.dat","r");
-  (void) fscanf(specf,"%d %d",&Nx,&Ny);
-  (void) fscanf(specf,"%d",&nthreads);
-  fclose(specf);
+//  (void) fscanf(specf,"%d %d",&Nx,&Ny);
+ // (void) fscanf(specf,"%d",&nthreads);
+  //fclose(specf);
+	Nx = atoi(argv[1]);
+	Ny = atoi(argv[2]);
+	nthreads = atoi(argv[3]);
+	int barrier = atoi(argv[4]);
 
   // Threads 
   pthread_t *thread=new pthread_t[nthreads];
@@ -28,15 +32,19 @@ int main(int argc, char **argv)
 	int Nt=int(1.0/dt);
     double norm=0.0;
 
-#if BARRIER == 1
+//#if BARRIER == 1
+if(barrier == 1)
 	printf("Version: Overlap\n");
-#elif BARRIER == 2
+//#elif BARRIER == 2
+else if(barrier == 2)
 	printf("Version: Peer-to-peer\n");
-#elif BARRIER ==3
+//#elif BARRIER ==3
+else if(barrier ==3)
 	printf("Version: Synchronize\n");
-#else
+//#else
+else
 	printf("Warning: No synchronization defined!\n");
-#endif
+//#endif
 	
   printf("Problem size     : %d x %d\n", Nx+1, Ny+1);
   printf("Number of threads: %d\n", nthreads);
@@ -52,7 +60,8 @@ int main(int argc, char **argv)
   }
   arg[nthreads-1].x2=Nx;
 
-#if BARRIER == 2
+//#if BARRIER == 2
+if(barrier == 2){
   // Set pairwise peer-to-peer synchronization barriers
   if (nthreads==1){  // Make the code homogeneous
     barrier[0].init(&thread[0],&thread[0],0);
@@ -74,7 +83,8 @@ int main(int argc, char **argv)
     arg[nthreads-1].barrier1=&barrier[nthreads-1];
     arg[nthreads-1].barrier2=&barrier[nthreads];
   }    
-#endif
+}
+//#endif
     
   // Solve the problem
   int t1,t2;
