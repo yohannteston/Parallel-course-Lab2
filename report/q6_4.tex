@@ -23,4 +23,11 @@ Bigger matrix stay around a speedup of 2 for any number of thread.\\
   \label{fig:gram3}
 \end{figure}
 
-The third algorithm have a better speedup than the second.  $2000\times 2000$ matrix reach a speedup of $~7.5$ with 64 threads. Other big matrix are between $~3.5$ and $~5$ this time, and we don't see any decrease with this matrix. Only the $1000\times 1000$ have a really big speedup (10 at the maximum) and decrease quickly just after.
+The third algorithm have a better speedup than the second.  $2000\times 2000$ matrix reach a speedup of $~7.5$ with 64 threads. Other big matrix are between $~3.5$ and $~5$ this time, and we don't see any decrease with this matrix. Only the $1000\times 1000$ have a really big speedup (10 at the maximum) and decrease quickly just after.\\
+
+The difference is due of the way used to parallelize the algorithm.
+In the first place we spawn all the thread inside the main loop.
+So at every step we wait for everybody and give new work when everybody finish.
+But in second algorithm we use lock to ensure that the needed value are calculated and we break the main loop in subset to give work to every thread.
+So we just wait for 1 threads and not all. In this case, thread that do not need value from a specific thread can work when other wait.
+
