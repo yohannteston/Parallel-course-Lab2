@@ -1,0 +1,12 @@
+set title "Time taken by both of the matrices multiplication programs"
+set ylabel "Time"
+set xlabel "Threads"
+set grid
+set terminal postscript enhanced "Helvetica" 12
+#set pointsize 2
+#set terminal postscript portrait enhanced
+#set term postscript eps enhanced
+#set output "graph.eps"
+plot "pic/matmul.dat" index 0:0 using 1:($3) ti "Non optimized" with linespoints,\
+"pic/matmul.dat" index 1 using 1:($3) with linespoints ti "Optimized"
+

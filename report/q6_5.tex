@@ -1,9 +1,8 @@
 \chapter{Matrices multiplication}
 
-The code of the non-optimized version of this program can be found in the appendix \ref{matmul} and that of the optimized version in the appendix \ref{matmulot}. 
-The optimization done in the version is simply an inversion of the two inner loops used to perform the matrices multiplication. It optimizes the use of the cache and this is enough to speed the program up considerably.
-
-The picture \ref{matmul_pic} presents the results.
+The code of the non-optimized version of this program can be found in the appendix \ref{matmul} and that of the optimized version in the appendix \ref{matmulot}. For simplicity, we restricted the program to a number of threads $t$ being a perfect square, like in the first assignment.\\
+ 
+The optimization done in the version is simply an inversion of the two inner loops used to perform the matrices multiplication. It optimizes the use of the cache and this is enough to speed the program up considerably, as can be seen on the diagram \ref{matmul_pic}.
 
 \begin{figure}[h]
   \begin{center}
@@ -13,5 +12,16 @@ The picture \ref{matmul_pic} presents the results.
   \label{matmul_pic}
 \end{figure}
 
-As we can see on the diagram, performances are better with the cache optimisation of the second version. This shows the importance of knowing how data is stored in the computer and how to optimize the access to it.
+The speedup is better with the optimized version. Indeed, with this loop order, the number of cache misses has reduced considerably. Since a cache miss is very time consuming, avoiding them improves the performances. This shows the importance of knowing how data is stored in the computer and how to optimize the access to it.\\
+
+The picture \ref{matmul_time} shows the great difference between the execution times of the algorithm (and therefore the influence the cache has on the performances).
+
+\begin{figure}[h]
+  \begin{center}
+         \resizebox{160mm}{!}{\includegraphics{pic/graph_matmul_time.eps}}
+  \end{center}
+  \caption{Time taken by both of the matrices multiplication programs}
+  \label{matmul_time}
+\end{figure}
+
 
