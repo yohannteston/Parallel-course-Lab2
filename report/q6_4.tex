@@ -1,6 +1,8 @@
 \section{Gram-Schmidt orthogonalization}
 
-\begin{figure}[h]
+To compare the two algorithm we test for the same number of data various number of threads. The figure \ref{fig:gram2} shows the result for the second algorithm, and the figure \ref{fig:gram3} shows the result for the third algorithm.\\
+
+\begin{figure}[!h]
   \begin{center}
          \resizebox{160mm}{!}{\includegraphics{pic/graph_gram2.eps}}
   \end{center}
@@ -8,7 +10,12 @@
   \label{fig:gram2}
 \end{figure}
 
-\begin{figure}[h]
+In \ref{fig:gram2} we can see that low size matrix don't have any speedup ($10$ and $100$) because of the overhead.
+Matrix of $1000\times 1000$ and  $2000\times 2000$ element have a big speedup for a low number of thread (both have the max speedup for 8 threads, respectively $~3.25$ and $~4.75$), but with more thread the speedup decrease quickly. For the $1000\times 1000$ matrix we see that the speedup go below 1, and for $2000\times 2000$ we stay around $1.70$.
+
+Bigger matrix stay around a speedup of 2 for any number of thread.\\
+
+\begin{figure}[!h]
   \begin{center}
          \resizebox{160mm}{!}{\includegraphics{pic/graph_gram3.eps}}
   \end{center}
@@ -16,4 +23,4 @@
   \label{fig:gram3}
 \end{figure}
 
-
+The third algorithm have a better speedup than the second.  $2000\times 2000$ matrix reach a speedup of $~7.5$ with 64 threads. Other big matrix are between $~3.5$ and $~5$ this time, and we don't see any decrease with this matrix. Only the $1000\times 1000$ have a really big speedup (10 at the maximum) and decrease quickly just after.

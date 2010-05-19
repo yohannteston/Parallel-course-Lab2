@@ -3,6 +3,7 @@ set ylabel "Speedup"
 set xlabel "Threads"
 set grid
 #set pointsize 2
+set terminal postscript enhanced "Helvetica" 12
 #set terminal postscript portrait enhanced
 #set term postscript eps enhanced
 #set output "graph.eps"

@@ -3,9 +3,10 @@ set ylabel "Speedup"
 set xlabel "Threads"
 set grid
 #set pointsize 2
-#set terminal postscript portrait enhanced
-set term postscript eps enhanced
-set output "graph.eps"
+set terminal postscript enhanced "Helvetica" 12
+#set term postscript eps enhanced
+#set output "graph.eps"
+#set font "Helvetica,12"
 plot "pic/data_gram2.dat" index 0:0 using 2:($3/$4) ti "10" with linespoints,\
 "pic/data_gram2.dat" index 1:1 using 2:($3/$4) ti "100" with linespoints,\
 "pic/data_gram2.dat" index 2:2 using 2:($3/$4) ti "1000" with linespoints,\
